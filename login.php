@@ -1,5 +1,6 @@
 <?php
 include "connection_db.php";
+include "jwt.php";
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -20,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email = validate($_POST['email']);
         $password = validate($_POST['password']);
 
-        $sql = "SELECT * FROM users WHERE email='$email'";
+        $sql = "SELECT * FROM users JOIN user_types On users.user_type_id = user_types.id WHERE email='$email'";
         $result = mysqli_query($link, $sql);
         $response = [];
 
@@ -33,9 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $payload = array(
                     "user_id" => $row['id'],
-                    "email" => $email
+                    "email" => $email,
+                    "role" => $row['role']
                 );
-                $secret_key = "code123";
                 $jwt = JWT::encode($payload, $secret_key);
 
                 echo json_encode(array(
