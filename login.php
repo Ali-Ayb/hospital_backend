@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $payload = array(
                     "user_id" => $row['id'],
-                    "username" => $email
+                    "email" => $email
                 );
                 $secret_key = "code123";
                 $jwt = JWT::encode($payload, $secret_key);
