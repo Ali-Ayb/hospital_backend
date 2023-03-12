@@ -4,10 +4,9 @@ include 'jwt.php';
 
 $headers = apache_request_headers();
 if (isset($headers['Authorization'])) {
-    if (!verifyToken($headers['Authorization'], $secret_key)) {
-        echo 'wrong token';
+
+    if (!verifyToken($headers['Authorization'], $secret_key))
         exit;
-    }
 }
 
 // $token = $_POST['token'];
@@ -18,9 +17,9 @@ if ($role != 'admin') {
     echo 'Not Authorized';
     exit;
 }
+echo 'here';
+exit;
 $user_type_name = 'patient';
-
-
 $user_type_id = $link->prepare('SELECT id FROM user_types WHERE name = ? ');
 $user_type_id->bind_param('s', $user_type_name);
 $user_type_id->execute();

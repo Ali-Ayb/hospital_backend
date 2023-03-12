@@ -35,7 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $payload = array(
                     "user_id" => $row['id'],
                     "email" => $email,
-                    "role" => $row['role']
+                    "role" => $row['role'],
+                    "exp" => time() + 1 * 60
                 );
                 $jwt = JWT::encode($payload, $secret_key);
 
