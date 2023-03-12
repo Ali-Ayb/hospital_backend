@@ -10,7 +10,7 @@ if (isset($headers['Authorization'])) {
 }
 
 
-$patient_name = $link->prepare('select name from medications');
+$patient_name = $link->prepare('select name from medicatoins');
 $patient_name->execute();
 
 $result = $patient_name->get_result();
