@@ -19,7 +19,7 @@ $user_type_id->fetch();
 $user_type_id->close();
 
 $department = $link->prepare('select room_number from rooms where department_id = ?');
-$user_type_id->bind_param('i', $department_id);
+$department->bind_param('i', $department_id);
 $department->execute();
 
 $result = $department->get_result();
