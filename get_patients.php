@@ -9,18 +9,14 @@ if (isset($headers['Authorization'])) {
         exit;
 }
 
-// $token = $_POST['token'];
-
 $user_info = user_info($headers['Authorization'], $secret_key);
 $role = $user_info->role;
 if ($role != 'admin') {
     echo 'Not Authorized';
     exit;
 }
-echo 'here';
-exit;
 $user_type_name = 'patient';
-$user_type_id = $link->prepare('SELECT id FROM user_types WHERE name = ? ');
+$user_type_id = $link->prepare('SELECT id FROM user_types WHERE role = ? ');
 $user_type_id->bind_param('s', $user_type_name);
 $user_type_id->execute();
 $user_type_id->bind_result($id);

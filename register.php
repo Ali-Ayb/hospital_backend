@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $user_type = 'patient';
 
-        $stmt = mysqli_prepare($link, "SELECT id FROM user_types WHERE name = ?");
+        $stmt = mysqli_prepare($link, "SELECT id FROM user_types WHERE role = ?");
         mysqli_stmt_bind_param($stmt, "s", $user_type);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_bind_result($stmt, $user_type_id);
